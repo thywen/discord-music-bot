@@ -14,14 +14,12 @@ class Game:
 
     async def start_game(self, channel):
         if self.__running:
-            await channel.send('Quiz already started in channel {}, you can stop it with !stop or !halt'
+            await channel.send('Quiz already started in channel {}, you can stop it with !stop'
                                .format(self._channel.name))
         else:
             self._channel = channel
             self.__running = True
             await channel.send('@here Quiz starting in 10 seconds...')
-            await asyncio.sleep(10)
-            await channel.send('Started!')
 
     async def stop_game(self, channel):
         if self.__running:
@@ -29,3 +27,6 @@ class Game:
             await channel.send('Quiz stopped')
         else:
             await channel.send('Why do you want to stop a not running game?')
+
+    def game_running(self):
+        return self.__running
